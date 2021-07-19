@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- 核心配置 -->
+<configuration>
+
+    <properties resource="db.properties"/>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+<!--        <typeAlias type="com.mana.pojo.Student" alias="Student"/>-->
+        <package name="com.mana.pojo"/>
+    </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+<!--        <mapper resource="com/mana/dao/StudentMapper.xml"/>-->
+        <mapper class="com.mana.dao.StudentMapper"/>
+        <mapper class="com.mana.dao.TeacherMapper"/>
+
+<!--        以下方式!!-->
+<!--        接口和他的Mapper配置文件必须同名-->
+<!--        接口和他的mapper必须在同一个包下-->
+<!--        <mapper class="com.mana.dao.StudentMapper" />-->
+<!--        <package name="com.mana.dao"/>-->
+    </mappers>
+</configuration>

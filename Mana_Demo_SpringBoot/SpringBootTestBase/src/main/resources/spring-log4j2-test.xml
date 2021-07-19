@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--文件名统一为log4j2-spring.xml-->
+<!--monitorInterval：Log4j2 自动检测修改配置文件和重新配置本身，设置间隔秒数-->
+<configuration monitorInterval="30">
+    <!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+    <!--变量配置-->
+    <Properties>
+        <!--统一的日志格式，不建议修改，为了方便以后的ELK统一解析-->
+        <property name="CONSOLE_LOG_PATTERN" value=" %date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] [%thread] %logger{36} %msg%n" />
+        <!-- 定义日志存储的路径,需要修改 -->
+        <property name="FILE_NAME" value="spring-boot-test-base" />
+        <property name="FILE_PATH" value="E:/workFile/logs/Chloe" />
+    </Properties>
+
+    <appenders>
+        <console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+            <!--控制台只输出level及其以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+        </console>
+
+        <!--文件会打印出所有信息-->
+        <File name="FileLog" fileName="${FILE_PATH}/${FILE_NAME}.log" append="true">
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+        </File>
+
+        <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFileInfo" fileName="${FILE_PATH}/${FILE_NAME}-info.log"
+                     filePattern="${FILE_PATH}/${FILE_NAME}-info-%d{yyyy-MM-dd}_%i.log.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+            <Policies>
+                <!--interval属性用来指定多久滚动一次，默认是1 hour-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy-->
+            <DefaultRolloverStrategy max="15"/>
+        </RollingFile>
+
+        <!-- 这个会打印出所有的warn及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFileWarn" fileName="${FILE_PATH}/${FILE_NAME}-warn.log"
+                     filePattern="${FILE_PATH}/${FILE_NAME}-warn-%d{yyyy-MM-dd}_%i.log.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+            <Policies>
+                <!--interval属性用来指定多久滚动一次，默认是1 hour-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="15"/>
+        </RollingFile>
+
+        <!-- 这个会打印出所有的error及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFileError" fileName="${FILE_PATH}/${FILE_NAME}-error.log"
+                     filePattern="${FILE_PATH}/${FILE_NAME}-error-%d{yyyy-MM-dd}_%i.log.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+            <Policies>
+                <!--interval属性用来指定多久滚动一次，默认是1 hour-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="15"/>
+        </RollingFile>
+    </appenders>
+
+    <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
+    <!--然后定义loggers，只有定义了logger并引入的appender，appender才会生效-->
+    <!--若是additivity设为false，则 子Logger 只会在自己的appender里输出，而不会在 父Logger 的appender里输出。-->
+    <!--根据需求自定义-->
+    <loggers>
+        <!--Nacos心跳日志改为warn，心跳日志不需要写入到文件中-->
+        <Logger name="com.alibaba.nacos.client" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <Logger name="org.mybatis" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <root level="info">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="FileLog"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileWarn"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+    </loggers>
+
+</configuration>

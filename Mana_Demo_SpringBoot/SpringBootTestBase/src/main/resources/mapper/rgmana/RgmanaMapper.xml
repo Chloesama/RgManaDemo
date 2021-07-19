@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chloe.mapper.rgmana.RgmanaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chloe.pojo.rgmana.Rgmana">
+        <id column="t1" property="t1" />
+        <result column="t2" property="t2" />
+        <result column="t3" property="t3" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        t1, t2, t3
+    </sql>
+
+</mapper>

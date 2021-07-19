@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>Chloe</title>
+</head>
+<body>
+    <div id="app">
+        <button-count :c="count"></button-count>
+        <button @click="count++">点击</button>
+    </div>
+<script src="js/vue.js"></script>
+<script>
+
+    const buttonCount = {
+        data(){
+            return {
+                count:0,
+            }
+        },
+        props:{
+            c:Number,
+        },
+        template:`
+            <p>统计{{c}}</p>
+            <button @click="add">你点击了按钮{{count}}次</button>
+        `,
+        methods:{
+            add(){
+                this.count ++;
+            }
+        },
+    };
+    const app = Vue.createApp({
+        data(){
+            return {
+                count:0,
+            }
+        },
+        components:{
+            buttonCount,
+        }
+    });
+    app.mount("#app");
+</script>
+</body>
+</html>

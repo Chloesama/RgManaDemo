@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mana.dao.StudentMapper">
+
+    <select id="getTeacherList" resultType="teacher">
+        select * from teacher
+    </select>
+
+
+    <select id="getTeacher" resultType="teacher">
+        select * from teacher where id = #{tid}
+    </select>
+
+    <resultMap id="TeacherStudents" type="teacher">
+        <result property="id" column="tid"/>
+        <result property="name" column="tname" />
+<!--        复杂的属性,我们需要单独处理,对象!!-->
+        <collection property="students" ofType="student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+        </collection>
+    </resultMap>
+
+    <select id="getTeacherStudent" resultType="TeacherStudents" >
+        select s.id sid,s.name sname,t.id tid,t.name tname from student s,teacher t where s.tid= t.id and t.id = #{tid}
+    </select>
+
+
+
+
+
+<!--    =====================-->
+
+<!--    方式二-->
+
+    <resultMap id="TeacherStudents2" type="Teacher">
+        <result property="id" column="tid"/>
+        <result property="name" column="tname" />
+        <collection property="students" javaType="ArrayList" ofType="student" select="getStudentByTeacherId" column="id"/>
+    </resultMap>
+    <select id="getTeacher2" resultMap="TeacherStudents2" >
+        select * from teacher where id = #{tid}
+    </select>
+
+    <select id="getStudentByTeacherId" resultType="student">
+        select * from student where tid = #{tid}
+    </select>
+
+</mapper>
