@@ -64,22 +64,26 @@ public class CodeGeneratorPlus {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-//        dsc.setDbType(DbType.POSTGRE_SQL);		//数据库类型	该类内置了常用的数据库类型【必须】
+        dsc.setDbType(DbType.POSTGRE_SQL);		//数据库类型	该类内置了常用的数据库类型【必须】
         //dsc.setDbType(DbType.ORACLE);		//数据库类型	该类内置了常用的数据库类型【必须】
-        dsc.setDbType(DbType.MYSQL);		//数据库类型	该类内置了常用的数据库类型【必须】
+        //dsc.setDbType(DbType.MYSQL);		//数据库类型	该类内置了常用的数据库类型【必须】
         //dsc.setUrl("jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.88.134)(PORT = 1521)) )(CONNECT_DATA=(SERVICE_NAME = orcl.test)))");
         // dsc.setSchemaName("public");
-        /*dsc.setUrl("jdbc:postgresql://172.22.2.17:5435/postgres?currentSchema=perf");
-        dsc.setDriverName("org.postgresql.Driver");*/
+
+
 
         //数据库连接
-//        dsc.setUrl("jdbc:postgresql://172.22.2.17:5437/nsk?currentSchema=perf");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/chloe?useUnicode=true&useSSL=true");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+        dsc.setUrl("jdbc:postgresql://172.22.2.17:5437/nsk?currentSchema=perf");
+        dsc.setDriverName("org.postgresql.Driver");
+//        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/chloe?useUnicode=true&useSSL=true");
+//        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
 
-        dsc.setUsername("root");
-        dsc.setPassword("123456");
-//        dsc.setSchemaName("fm");
+        //dsc.setUsername("root");
+        //dsc.setPassword("123456");
+
+        dsc.setUsername("postgres");
+        dsc.setPassword("1bzsdkc@NSG#");
+        dsc.setSchemaName("fm");
 
 
         /*dsc.setUrl("jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.28.236)(PORT = 1521)) )(CONNECT_DATA=(SERVICE_NAME = orcl)))");
@@ -111,12 +115,12 @@ public class CodeGeneratorPlus {
         PackageConfig pc = new PackageConfig();
 //	        pc.setModuleName(scanner("模块名"));
         pc.setParent("com.ccs.nsg.osc");
-        pc.setEntity("entity.alarm");
-        pc.setMapper("dm.mapper.alarm");
-        pc.setXml("mapper.alarm");
-        pc.setController("controller.alarm");
-        pc.setService("service.alarm");
-        pc.setServiceImpl("service.impl.alarm");
+        pc.setEntity("entity");
+        pc.setMapper("dm.mapper");
+        pc.setXml("mapper");
+        pc.setController("controller");
+        pc.setService("service");
+        pc.setServiceImpl("service.impl");
 
         /*pc.setParent("com.ccs.gels.perf");
         pc.setEntity("entity");
@@ -159,7 +163,7 @@ public class CodeGeneratorPlus {
         strategy.setRestControllerStyle(true);	//生成 @RestController 控制器
         //strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");	//自定义继承的Controller类全称，带包名
         //strategy.setInclude(scanner("表名"));		//需要包含的表名，允许正则表达式（与exclude二选一配置）
-        strategy.setInclude(new String[] { "rgmana"}); // 需要生成的表可以多张表
+        strategy.setInclude(new String[] {"t_preprocess_result"}); // 需要生成的表可以多张表
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         strategy.setControllerMappingHyphenStyle(true);	//驼峰转连字符
         //strategy.setTablePrefix(pc.getModuleName() + "_");	//是否生成实体时，生成字段注解

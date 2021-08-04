@@ -10,6 +10,7 @@ import java.util.Base64;
 
 public class ManaDailyTest {
 
+
     public static void main(String[] args) throws Exception {
         String xml = "H4sIAAAAAAAAAIVU7W6bMBT9vUl7B89SpTYqYAi0TQVUBNwUFQLCpF1WVSgidELjowJS7fFnG0qJ\n" +
                 "VmnkB7k+Hz7Xvol+86cswFvWtHldGVAWEQRZldb7vPplwE18K1xBcGN++6o3dd3R9xc9xn7oWTFO\n" +

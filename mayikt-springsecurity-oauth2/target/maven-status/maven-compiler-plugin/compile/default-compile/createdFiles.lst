@@ -1,0 +1,3 @@
+com\mayikt\config\App.class
+com\mayikt\config\AuthorizationConfig.class
+com\mayikt\config\SecurityConfig.class

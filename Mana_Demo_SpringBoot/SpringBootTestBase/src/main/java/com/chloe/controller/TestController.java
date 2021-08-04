@@ -2,12 +2,13 @@ package com.chloe.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.chloe.mapper.rgmana.RgmanaMapper;
-import com.chloe.pojo.rgmana.Rgmana;
+import com.chloe.pojo.Rgmana;
 import com.chloe.redis.RedisUtil;
-import com.chloe.service.rgmana.RgmanaService;
+import com.chloe.service.RgmanaService;
+import com.chloe.srv.ChloeSrv;
 import lombok.extern.slf4j.Slf4j;
 import mana.util.json.JsonUtil;
+import org.apache.poi.ss.formula.functions.Choose;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,6 +32,9 @@ public class TestController {
 
     @Resource
     RgmanaService rgmanaService;
+
+    @Resource
+    ChloeSrv chloeSrv;
 
     @ResponseBody
     @GetMapping("/hello")
@@ -71,5 +75,13 @@ public class TestController {
         Map<String,Object> resultMap = new HashMap<>(1);
         resultMap.put("user",user);
         return resultMap;
+    }
+
+    @GetMapping("AnnotationAopThread")
+    public String AnnotationAopThread(){
+        log.info("Chloe1");
+        chloeSrv.testChloe();
+        log.info("Chloe2");
+        return "Chloe!!!";
     }
 }

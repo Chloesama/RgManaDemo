@@ -15,6 +15,8 @@
         <module>Mana_Log4j2</module>
         <module>Mana_Mybatis</module>
         <module>Mysql_Jdbc</module>
+        <module>DynamicProxy</module>
+        <module>Annotation-Test</module>
     </modules>
 
 </project>

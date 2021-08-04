@@ -19,6 +19,7 @@
         <module>Spring-06-proxy</module>
         <module>Spring-07-aop</module>
         <module>Spring-08-mybatis</module>
+        <module>SpringStudy</module>
     </modules>
 
     <artifactId>Mana_Demo_Spring_Test</artifactId>

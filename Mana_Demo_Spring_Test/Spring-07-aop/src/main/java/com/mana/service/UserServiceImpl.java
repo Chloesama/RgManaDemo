@@ -1,9 +1,19 @@
 package com.mana.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserServiceImpl implements UserService{
+
+    ChloeBean chloeBean;
+
+    @Autowired
+    public UserServiceImpl(ChloeBean abc){
+        this.chloeBean = abc;
+        System.out.println(chloeBean);
+    }
+
     @Override
     public void add() {
         System.out.println("增加了一个用户");

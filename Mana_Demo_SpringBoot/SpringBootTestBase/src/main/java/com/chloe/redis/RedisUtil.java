@@ -1,5 +1,8 @@
 package com.chloe.redis;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -18,8 +21,14 @@ import java.util.concurrent.TimeUnit;
  * @Date 2021/7/9 11:14
  * @Version 1.0
  **/
+@Slf4j
 @Component
-public class RedisUtil {
+public class RedisUtil{
+
+    public RedisUtil() {
+        System.out.println("RedisUtil的构造方法");
+    }
+
     @Resource
     RedisTemplate<String, Object> redisTemplate;
 
@@ -372,7 +381,7 @@ public class RedisUtil {
     public long sSetAndTime(String key, long time, Object... values) {
         try {
             Long count = redisTemplate.opsForSet().add(key, values);
-            if (time > 0){
+            if (time > 0) {
                 expire(key, time);
             }
             return count;
@@ -529,7 +538,7 @@ public class RedisUtil {
     public boolean lSet(String key, List<Object> value, long time) {
         try {
             redisTemplate.opsForList().rightPushAll(key, value);
-            if (time > 0){
+            if (time > 0) {
                 expire(key, time);
             }
             return true;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chloe.mapper.rgmana.RgmanaMapper">
+<mapper namespace="com.chloe.mapper.RgmanaMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.chloe.pojo.rgmana.Rgmana">
+    <resultMap id="BaseResultMap" type="com.chloe.pojo.Rgmana">
         <id column="t1" property="t1" />
         <result column="t2" property="t2" />
         <result column="t3" property="t3" />

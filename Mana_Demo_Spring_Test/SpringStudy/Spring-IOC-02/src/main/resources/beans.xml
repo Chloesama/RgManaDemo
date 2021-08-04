@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="transferService" class="com.xxx.TransferServiceImpl">
+        <property name="AccountDao" ref="accountDao"></property>
+    </bean>
+    <bean id="accountDao" class="com.xxx.JdbcAccountDaoImpl"></bean>
+</beans>

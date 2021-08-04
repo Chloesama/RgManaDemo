@@ -12,6 +12,9 @@
 
 
 <!--    <bean id="userService" class="com.mana.service.UserServiceImpl"/>-->
+    <bean id="chloeBean" class="com.mana.service.ChloeBean"/>
+    <bean id="chloeBean2" class="com.mana.service.ChloeBean"/>
+    <bean id="abc" class="com.mana.service.ChloeBean"/>
 <!--    <bean id="log" class="com.mana.log.Log"/>-->
 <!--    <bean id="afterLog" class="com.mana.log.AfterLog"/>-->
 

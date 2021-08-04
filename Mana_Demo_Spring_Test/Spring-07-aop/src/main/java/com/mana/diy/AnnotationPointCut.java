@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Aspect //标注这个类是一个切面
 @Component
 public class AnnotationPointCut {
-    @Before("execution(* com.mana.service.UserServiceImpl.*(..))")
+    @Before(value = "execution(* com.mana.service.UserServiceImpl.*(..))")
     public void before(){
         System.out.println("============方式执行前====================");
     }
