@@ -11,4 +11,11 @@
 
     <artifactId>Mana_Thread</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>Mana_Demo_Util</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

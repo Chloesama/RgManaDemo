@@ -25,6 +25,7 @@ import java.util.Map;
  **/
 @Slf4j
 @RestController
+@RequestMapping("test")
 public class TestController {
 
     @Resource

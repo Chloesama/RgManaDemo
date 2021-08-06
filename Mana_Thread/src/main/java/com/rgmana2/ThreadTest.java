@@ -66,6 +66,5 @@ public class ThreadTest implements Runnable{
         ThreadTest threadTest2 = new ThreadTest();
         new Thread(threadTest1).start();
         new Thread(threadTest2).start();
-
     }
 }

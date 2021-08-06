@@ -34,6 +34,5 @@ public class ThreadTest2 {
         synchronized (lock) {
             lock.notify();
         }
-
     }
 }
