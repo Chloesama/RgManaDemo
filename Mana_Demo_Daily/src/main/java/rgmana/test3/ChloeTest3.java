@@ -1,9 +1,6 @@
 package rgmana.test3;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.NumberFormat;
 
 /**
  * @ClassName ChloeTest3
@@ -12,24 +9,24 @@ import java.util.Map;
  * @Date 2021/7/31 14:03
  * @Version 1.0
  **/
-public class ChloeTest3 extends Object{
+public class ChloeTest3 extends Object {
     public static void main(String[] args) {
-        //List<Integer> list = new ArrayList<>();
-        //list.add(1);
-        //list.add(2);
-        //list.add(3);
-        //
-        //list.forEach((p -> {
-        //    System.out.println(p);
-        //}));
-
-        Map<String,Integer> map = new HashMap<>();
-        map.put("1",1);
-        map.put("2",2);
-        map.put("3",3);
-
-        map.forEach((k,v) -> {
-            System.out.println(k + "," + v);
-        });
+        for(int i = 0;i<100;i++){
+            NumberFormat nf = NumberFormat.getNumberInstance();
+            nf.setMaximumFractionDigits(2);
+            nf.setGroupingUsed(false);
+            double d1 = 95;
+            double d = Math.random();
+            d = d % 0.30;
+            double a = (Math.random() * 100) % 2;
+            int b = (int)a;
+            double d2 = 0;
+            if(b == 0){
+                d2 = d1 + Double.valueOf(nf.format(d));
+            }else{
+                d2 = d1 - Double.valueOf(nf.format(d));
+            }
+            System.out.println(d2);
+        }
     }
 }

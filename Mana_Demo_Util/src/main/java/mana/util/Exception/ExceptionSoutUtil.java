@@ -1,5 +1,7 @@
 package mana.util.Exception;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -50,5 +52,13 @@ public class ExceptionSoutUtil {
         pw.flush();
         sw.flush();
         return sw.toString();
+    }
+
+    public static void main(String[] args) {
+        try{
+            int a = 1 / 0;
+        }catch (Exception e){
+            System.out.println(ExceptionUtils.getFullStackTrace(e));
+        }
     }
 }

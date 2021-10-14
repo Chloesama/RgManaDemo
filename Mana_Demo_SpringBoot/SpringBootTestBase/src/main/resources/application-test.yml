@@ -46,3 +46,6 @@ spring:
       url: jdbc:p6spy:mysql://localhost:3306/chloe?useUnicode=true&useSSL=true
       username: root
       password: 123456
+chloe:
+  test:
+    path: E:\\

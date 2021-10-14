@@ -15,7 +15,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @Date 2021/6/28 10:38
  * @Version 1.0
  **/
-@MapperScan(value = "com.chloe.mapper")
+@MapperScan({"com.chloe.mapper"})
 @SpringBootApplication
 public class ChloeApplication {
     public static void main(String[] args) {

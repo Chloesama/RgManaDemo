@@ -1,7 +1,7 @@
 package com.chloe.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.chloe.mapper.RgmanaMapper;
+import com.chloe.mapper.test.RgmanaMapper;
 import com.chloe.pojo.Rgmana;
 import com.chloe.service.RgmanaService;
 import org.springframework.stereotype.Service;

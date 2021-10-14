@@ -73,7 +73,8 @@ public class CodeGeneratorPlus {
 
 
         //数据库连接
-        dsc.setUrl("jdbc:postgresql://172.22.2.17:5437/nsk?currentSchema=perf");
+        //dsc.setUrl("jdbc:postgresql://localhost:5432/maoming?currentSchema=res");
+        dsc.setUrl("jdbc:postgresql://localhost:5432/netshark?currentSchema=iam");
         dsc.setDriverName("org.postgresql.Driver");
 //        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/chloe?useUnicode=true&useSSL=true");
 //        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
@@ -82,8 +83,9 @@ public class CodeGeneratorPlus {
         //dsc.setPassword("123456");
 
         dsc.setUsername("postgres");
-        dsc.setPassword("1bzsdkc@NSG#");
-        dsc.setSchemaName("fm");
+        //dsc.setPassword("1bzsdkc@NSG#");
+        dsc.setPassword("postgres");
+        dsc.setSchemaName("iam");
 
 
         /*dsc.setUrl("jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.28.236)(PORT = 1521)) )(CONNECT_DATA=(SERVICE_NAME = orcl)))");
@@ -163,7 +165,7 @@ public class CodeGeneratorPlus {
         strategy.setRestControllerStyle(true);	//生成 @RestController 控制器
         //strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");	//自定义继承的Controller类全称，带包名
         //strategy.setInclude(scanner("表名"));		//需要包含的表名，允许正则表达式（与exclude二选一配置）
-        strategy.setInclude(new String[] {"t_preprocess_result"}); // 需要生成的表可以多张表
+        strategy.setInclude(new String[] {"t_res_bas_static_user"}); // 需要生成的表可以多张表
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         strategy.setControllerMappingHyphenStyle(true);	//驼峰转连字符
         //strategy.setTablePrefix(pc.getModuleName() + "_");	//是否生成实体时，生成字段注解

@@ -1,4 +1,4 @@
-package com.chloe.mapper;
+package com.chloe.mapper.test;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.chloe.pojo.Rgmana;

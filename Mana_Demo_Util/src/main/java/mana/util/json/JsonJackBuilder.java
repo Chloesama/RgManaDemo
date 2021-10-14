@@ -70,7 +70,8 @@ public class JsonJackBuilder {
         }
 
         try {
-            return mapper.readValue(jsonString, clazz); //对放斜杠进行特殊处理，避免jason出错
+            //对放斜杠进行特殊处理，避免jason出错
+            return mapper.readValue(jsonString, clazz);
         } catch (IOException e) {
             ExceptionSoutUtil.getTraString(e);
             return null;

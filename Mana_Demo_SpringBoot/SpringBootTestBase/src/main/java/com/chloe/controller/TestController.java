@@ -2,13 +2,14 @@ package com.chloe.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.chloe.mapper.test.RgmanaMapper;
 import com.chloe.pojo.Rgmana;
 import com.chloe.redis.RedisUtil;
 import com.chloe.service.RgmanaService;
 import com.chloe.srv.ChloeSrv;
+import com.chloe.util.TestUtil;
 import lombok.extern.slf4j.Slf4j;
 import mana.util.json.JsonUtil;
-import org.apache.poi.ss.formula.functions.Choose;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,7 +36,13 @@ public class TestController {
     RgmanaService rgmanaService;
 
     @Resource
+    RgmanaMapper rgmanaMapper;
+
+    @Resource
     ChloeSrv chloeSrv;
+
+    @Resource
+    TestUtil testUtil;
 
     @ResponseBody
     @GetMapping("/hello")
@@ -66,17 +73,18 @@ public class TestController {
 //        queryWrapper.lambda().eq(Rgmana::getT1,"1");
         List<Rgmana> rgmanas = rgmanaService.list(queryWrapper);
         log.info("Chloe:" + rgmanas);
-        return rgmanas.toString();
+        return JsonUtil.toFastJsonByObject(rgmanas);
     }
 
     @PostMapping("PostChloe")
-    public Map<String,Object> PostChloe(@RequestBody Map<String,Object> data){
+    public String PostChloe(@RequestBody Map<String,Object> data){
         log.info("PostChloe:" + data);
         String user = (String) data.get("user");
         Map<String,Object> resultMap = new HashMap<>(1);
         resultMap.put("user",user);
-        return resultMap;
+        return JsonUtil.toFastJsonByObject(resultMap);
     }
+
 
     @GetMapping("AnnotationAopThread")
     public String AnnotationAopThread(){
@@ -84,5 +92,10 @@ public class TestController {
         chloeSrv.testChloe();
         log.info("Chloe2");
         return "Chloe!!!";
+    }
+
+    @GetMapping("ChloeTest")
+    public String ChloeTest(){
+        return testUtil.getPath();
     }
 }
