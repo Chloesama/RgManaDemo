@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class CodeGeneratorPlus {
 
     // 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
+
     /**
      * <p>
      * 读取控制台内容
@@ -46,30 +47,29 @@ public class CodeGeneratorPlus {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setOutputDir("E:\\data\\mybatis");
-        gc.setAuthor("hsh");					//作者
-        gc.setFileOverride(true);				//是否覆蓋已有文件 默认值：false
-        gc.setOpen(false);						//是否打开输出目录 默认值:true
+        gc.setAuthor("hsh");                    //作者
+        gc.setFileOverride(true);                //是否覆蓋已有文件 默认值：false
+        gc.setOpen(false);                        //是否打开输出目录 默认值:true
 
         //gc.setSwagger2(true);					//开启 swagger2 模式 默认false
-        gc.setBaseColumnList(true);				//开启 baseColumnList 默认false
-        gc.setBaseResultMap(true);				//开启 BaseResultMap 默认false
+        gc.setBaseColumnList(true);                //开启 baseColumnList 默认false
+        gc.setBaseResultMap(true);                //开启 BaseResultMap 默认false
         gc.setActiveRecord(true);
         //gc.setEntityName("%");			//实体命名方式  默认值：null 例如：%sEntity 生成 UserEntity
-        gc.setMapperName("%sMapper");			//mapper 命名方式 默认值：null 例如：%sDao 生成 UserDao
-        gc.setXmlName("%sMapper");				//Mapper xml 命名方式   默认值：null 例如：%sDao 生成 UserDao.xml
-        gc.setServiceName("%sService");			//service 命名方式   默认值：null 例如：%sBusiness 生成 UserBusiness
-        gc.setServiceImplName("%sServiceImpl");	//service impl 命名方式  默认值：null 例如：%sBusinessImpl 生成 UserBusinessImpl
-        gc.setControllerName("%sController");	//controller 命名方式    默认值：null 例如：%sAction 生成 UserAction
+        gc.setMapperName("%sMapper");            //mapper 命名方式 默认值：null 例如：%sDao 生成 UserDao
+        gc.setXmlName("%sMapper");                //Mapper xml 命名方式   默认值：null 例如：%sDao 生成 UserDao.xml
+        gc.setServiceName("%sService");            //service 命名方式   默认值：null 例如：%sBusiness 生成 UserBusiness
+        gc.setServiceImplName("%sServiceImpl");    //service impl 命名方式  默认值：null 例如：%sBusinessImpl 生成 UserBusinessImpl
+        gc.setControllerName("%sController");    //controller 命名方式    默认值：null 例如：%sAction 生成 UserAction
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setDbType(DbType.POSTGRE_SQL);		//数据库类型	该类内置了常用的数据库类型【必须】
+        dsc.setDbType(DbType.POSTGRE_SQL);        //数据库类型	该类内置了常用的数据库类型【必须】
         //dsc.setDbType(DbType.ORACLE);		//数据库类型	该类内置了常用的数据库类型【必须】
         //dsc.setDbType(DbType.MYSQL);		//数据库类型	该类内置了常用的数据库类型【必须】
         //dsc.setUrl("jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.88.134)(PORT = 1521)) )(CONNECT_DATA=(SERVICE_NAME = orcl.test)))");
         // dsc.setSchemaName("public");
-
 
 
         //数据库连接
@@ -116,9 +116,9 @@ public class CodeGeneratorPlus {
         // 包配置
         PackageConfig pc = new PackageConfig();
 //	        pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.ccs.nsg.osc");
+        pc.setParent("");
         pc.setEntity("entity");
-        pc.setMapper("dm.mapper");
+        pc.setMapper("mapper");
         pc.setXml("mapper");
         pc.setController("controller");
         pc.setService("service");
@@ -155,19 +155,19 @@ public class CodeGeneratorPlus {
 
         // 策略配置	数据库表配置，通过该配置，可指定需要生成哪些表或者排除哪些表
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setNaming(NamingStrategy.underline_to_camel);	//表名生成策略
+        strategy.setNaming(NamingStrategy.underline_to_camel);    //表名生成策略
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);//数据库表字段映射到实体的命名策略, 未指定按照 naming 执行
         //strategy.setCapitalMode(true);			// 全局大写命名 ORACLE 注意
-        strategy.setTablePrefix(new String[] { "T_" });
+        strategy.setTablePrefix(new String[]{"T_"});
         //strategy.setSuperEntityClass("com.baomidou.mybatisplus.extension.activerecord.Model");	//自定义继承的Entity类全称，带包名
         //strategy.setSuperEntityColumns(new String[] { "test_id", "age" }); 	//自定义实体，公共字段
-        strategy.setEntityLombokModel(true);	//【实体】是否为lombok模型（默认 false
-        strategy.setRestControllerStyle(true);	//生成 @RestController 控制器
+        strategy.setEntityLombokModel(true);    //【实体】是否为lombok模型（默认 false
+        strategy.setRestControllerStyle(true);    //生成 @RestController 控制器
         //strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");	//自定义继承的Controller类全称，带包名
-        //strategy.setInclude(scanner("表名"));		//需要包含的表名，允许正则表达式（与exclude二选一配置）
-        strategy.setInclude(new String[] {"t_res_bas_static_user"}); // 需要生成的表可以多张表
+        //strategy.setInclude(scanner("t_res_board_type"));		//需要包含的表名，允许正则表达式（与exclude二选一配置）
+        strategy.setInclude(new String[]{"T_RES_QOS_RATE"}); //需要生成的表可以多张表
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
-        strategy.setControllerMappingHyphenStyle(true);	//驼峰转连字符
+        strategy.setControllerMappingHyphenStyle(true);    //驼峰转连字符
         //strategy.setTablePrefix(pc.getModuleName() + "_");	//是否生成实体时，生成字段注解
         strategy.setEntityTableFieldAnnotationEnable(true);
         mpg.setStrategy(strategy);

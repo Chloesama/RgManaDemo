@@ -56,7 +56,6 @@
             <version>5.2.16.RELEASE</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
