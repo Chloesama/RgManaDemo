@@ -27,6 +27,7 @@
         <module>RgMana-version-dependency</module>
         <module>HttpSoap</module>
         <module>Mana_Thread</module>
+        <module>Mana_Demo_IO</module>
     </modules>
 
     <dependencies>
