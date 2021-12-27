@@ -19,7 +19,10 @@ public class BufferTest {
      */
     @Test
     public void test01(){
+        // JAVA堆内存
         ByteBuffer buffer = ByteBuffer.allocate(10);
+        // 直接内存
+//        ByteBuffer buffer = ByteBuffer.allocateDirect(10);
         System.out.println(buffer.position());
         System.out.println(buffer.limit());
         System.out.println(buffer.capacity());
