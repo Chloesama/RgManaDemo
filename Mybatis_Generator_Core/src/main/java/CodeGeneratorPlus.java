@@ -165,7 +165,7 @@ public class CodeGeneratorPlus {
         strategy.setRestControllerStyle(true);    //生成 @RestController 控制器
         //strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");	//自定义继承的Controller类全称，带包名
         //strategy.setInclude(scanner("t_res_board_type"));		//需要包含的表名，允许正则表达式（与exclude二选一配置）
-        strategy.setInclude(new String[]{"T_RES_QOS_RATE"}); //需要生成的表可以多张表
+        strategy.setInclude(new String[]{"T_RES_DEV_INSPECT_RULE"}); //需要生成的表可以多张表
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         strategy.setControllerMappingHyphenStyle(true);    //驼峰转连字符
         //strategy.setTablePrefix(pc.getModuleName() + "_");	//是否生成实体时，生成字段注解
