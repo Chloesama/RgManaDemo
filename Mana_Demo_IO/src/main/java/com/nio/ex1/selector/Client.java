@@ -1,5 +1,8 @@
 package com.nio.ex1.selector;
 
+import org.junit.Test;
+
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
@@ -14,16 +17,17 @@ import java.util.Scanner;
  * @Version 1.0
  **/
 public class Client {
+
     public static void main(String[] args) {
         try {
             SocketChannel sChannel = SocketChannel.open(new InetSocketAddress("127.0.0.1", 9999));
             sChannel.configureBlocking(false);
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
             Scanner scanner = new Scanner(System.in);
-            while (true){
+            while (true) {
                 System.out.println("请输入:");
                 String msg = scanner.nextLine();
-                if("Scarlet".equals(msg)){
+                if ("Scarlet".equals(msg)) {
                     break;
                 }
 

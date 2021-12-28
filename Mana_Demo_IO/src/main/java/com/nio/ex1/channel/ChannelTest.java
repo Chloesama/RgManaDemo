@@ -125,11 +125,17 @@ public class ChannelTest {
             FileChannel osChannel = fos.getChannel();
             FileChannel osChannel2 = fos2.getChannel();
 
-            osChannel.transferFrom(isChannel,isChannel.position(),isChannel.size());
+            osChannel.transferFrom(isChannel, isChannel.position(), isChannel.size());
 
             isChannel.position(0);
 
-            isChannel.transferTo(isChannel.position(),isChannel.size(),osChannel2);
+//            isChannel.transferTo(isChannel.position(),isChannel.size(),osChannel2);
+
+            //对于大容量的文件复制(> 2g)
+            long size = isChannel.size();
+            for (long left = size; left > 0; ) {
+                left -= isChannel.transferTo((size - left), left, osChannel2);
+            }
 
             isChannel.close();
             osChannel.close();

@@ -2,7 +2,10 @@ package mana.util.file;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 public class FileUtil {
     /**
@@ -27,7 +30,7 @@ public class FileUtil {
     /**
      * 写文件
      */
-    public static void writeFile(String filePath, String fileName,String str) {
+    public static void writeFile(String filePath, String fileName, String str) {
 
         try {
             File file = new File(filePath + "\\" + fileName);
@@ -54,9 +57,55 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 遍历删除目录下所有的文件和目录
+     *
+     * @param filePath
+     */
+    public static void delPathAllFile(String filePath) {
+        try {
+            Files.walkFileTree(Paths.get(filePath), new SimpleFileVisitor<Path>() {
+
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return super.visitFile(file, attrs);
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return super.postVisitDirectory(dir, exc);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void copyPathAllFile(String sourcePath, String targetPath) {
+        try {
+            Files.walk(Paths.get(sourcePath)).forEach(path -> {
+                String targetName = path.toString().replace(sourcePath, targetPath);
+                try {
+                    if (Files.isDirectory(path)) {
+                        Files.createDirectory(Paths.get(targetName));
+                    } else if (Files.isRegularFile(path)) {
+                        Files.copy(path, Paths.get(targetName));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void main(String[] args) {
         String filePath = "E:\\data";
         String fileName = "Chloe.txt";
-        FileUtil.writeFile(filePath,fileName,"test!!!");
+        FileUtil.writeFile(filePath, fileName, "test!!!");
     }
 }
