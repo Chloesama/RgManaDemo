@@ -70,6 +70,7 @@ public class ChatClient {
                         SocketChannel channel = (SocketChannel) sk.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         channel.read(buffer);
+                        channel.close();
                         System.out.println("接收到信息:" + new String(buffer.array()).trim());
                     }
                     it.remove();

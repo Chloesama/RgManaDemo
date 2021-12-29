@@ -63,8 +63,11 @@ public class ChatServer {
                 String msg = new String(buf.array(), 0, buf.remaining());
                 System.out.println("接收到的信息:" + msg);
                 sendMsgToAllClient(msg, channel);
+            } else {
+                sk.channel();
             }
         } catch (Exception e) {
+            //异常的情况下,这个得要把key给cancel了,不然selector那里会一直认为这个事件没有处理(从selector的集合中删除对应的key)
             sk.cancel();
             try {
                 System.out.println("有人离线了!!");
@@ -72,7 +75,7 @@ public class ChatServer {
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-//            e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
