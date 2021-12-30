@@ -28,6 +28,7 @@
         <module>HttpSoap</module>
         <module>Mana_Thread</module>
         <module>Mana_Demo_IO</module>
+        <module>Mana_Demo_Netty</module>
     </modules>
 
     <dependencies>

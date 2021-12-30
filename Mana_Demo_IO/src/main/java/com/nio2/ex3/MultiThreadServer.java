@@ -1,15 +1,13 @@
 package com.nio2.ex3;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @ClassName MultiThreadServer
@@ -27,8 +25,12 @@ public class MultiThreadServer {
             Selector boss = Selector.open();
             ssc.register(boss, SelectionKey.OP_ACCEPT);
             ssc.bind(new InetSocketAddress(9999));
-            Worker worker = new Worker("worker-0");
 
+            Worker[] workers = new Worker[Runtime.getRuntime().availableProcessors()];
+            for (int i = 0; i < workers.length; i++) {
+                workers[i] = new Worker("worker-" + i);
+            }
+            AtomicInteger index = new AtomicInteger();
             while (boss.select() > 0) {
                 Iterator<SelectionKey> it = boss.selectedKeys().iterator();
                 while (it.hasNext()) {
@@ -37,7 +39,7 @@ public class MultiThreadServer {
                     if (sk.isAcceptable()) {
                         SocketChannel sc = ssc.accept();
                         sc.configureBlocking(false);
-                        worker.register(sc);
+                        workers[index.getAndIncrement() & workers.length].register(sc);
                     }
                 }
             }
@@ -95,19 +97,19 @@ public class MultiThreadServer {
                         SelectionKey sk = it.next();
                         it.remove();
                         if (sk.isReadable()) {
-                            try{
+                            try {
                                 ByteBuffer buffer = ByteBuffer.allocate(16);
                                 SocketChannel sc = (SocketChannel) sk.channel();
                                 int read = sc.read(buffer);
                                 System.out.println("Scarlet:" + read);
-                                if(read == -1){
+                                if (read == -1) {
                                     sk.interestOps(sk.interestOps() - SelectionKey.OP_READ);
-                                }else{
+                                } else {
                                     buffer.flip();
                                     System.out.println(new String(buffer.array(), 0, buffer.remaining()));
                                 }
 
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 sk.interestOps(sk.interestOps() - SelectionKey.OP_READ);
 //                                sk.channel();
                                 e.printStackTrace();
