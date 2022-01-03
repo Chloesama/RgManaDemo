@@ -1,8 +1,7 @@
-package com.ex2;
+package com.ex2.eventLoop;
 
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.util.NettyRuntime;
 
 import java.util.concurrent.TimeUnit;
 

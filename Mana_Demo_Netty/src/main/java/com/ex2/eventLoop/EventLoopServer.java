@@ -1,4 +1,4 @@
-package com.ex2;
+package com.ex2.eventLoop;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
