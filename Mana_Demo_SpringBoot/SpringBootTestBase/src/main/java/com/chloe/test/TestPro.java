@@ -20,18 +20,18 @@ public class TestPro implements BeanPostProcessor, BeanFactoryPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("postProcessBeforeInitialization-" + beanName);
+//        System.out.println("postProcessBeforeInitialization-" + beanName);
         return bean;
     }
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("postProcessAfterInitialization-" + beanName);
+//        System.out.println("postProcessAfterInitialization-" + beanName);
         return bean;
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         BeanDefinition redisUtil = beanFactory.getBeanDefinition("redisUtil");
-        System.out.println("postProcessBeanFactory:" + redisUtil.toString());
+//        System.out.println("postProcessBeanFactory:" + redisUtil.toString());
     }
 }

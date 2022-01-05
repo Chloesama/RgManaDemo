@@ -36,9 +36,6 @@ public class TestController {
     RgmanaService rgmanaService;
 
     @Resource
-    RgmanaMapper rgmanaMapper;
-
-    @Resource
     ChloeSrv chloeSrv;
 
     @Resource

@@ -23,10 +23,10 @@ import java.util.concurrent.TimeUnit;
  **/
 @Slf4j
 @Component
-public class RedisUtil{
+public class RedisUtil {
 
     public RedisUtil() {
-        System.out.println("RedisUtil的构造方法");
+        log.info("RedisUtil的构造方法");
     }
 
     @Resource

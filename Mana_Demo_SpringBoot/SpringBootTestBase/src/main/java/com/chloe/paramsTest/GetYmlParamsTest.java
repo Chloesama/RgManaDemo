@@ -1,5 +1,6 @@
 package com.chloe.paramsTest;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import javax.annotation.PostConstruct;
  * @Date 2021/12/3 15:37
  * @Version 1.0
  **/
+@Slf4j
 @Component
 public class GetYmlParamsTest {
     @Value("${chloe.test.path}")
@@ -20,6 +22,6 @@ public class GetYmlParamsTest {
 
     @PostConstruct
     public void test(){
-        System.out.println("Scarlet:" + path);
+        log.info("Scarlet:" + path);
     }
 }
