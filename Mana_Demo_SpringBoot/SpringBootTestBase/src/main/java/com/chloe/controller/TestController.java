@@ -2,12 +2,12 @@ package com.chloe.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.chloe.mapper.test.RgmanaMapper;
+import com.chloe.bean.factory.BeanFactory;
 import com.chloe.pojo.Rgmana;
 import com.chloe.redis.RedisUtil;
 import com.chloe.service.RgmanaService;
 import com.chloe.srv.ChloeSrv;
-import com.chloe.util.TestUtil;
+import com.chloe.vo.ScarletTestVo;
 import lombok.extern.slf4j.Slf4j;
 import mana.util.json.JsonUtil;
 import org.springframework.web.bind.annotation.*;
@@ -38,34 +38,31 @@ public class TestController {
     @Resource
     ChloeSrv chloeSrv;
 
-    @Resource
-    TestUtil testUtil;
-
     @ResponseBody
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
 
-        redisUtil.set("Chloe","Chloe1-Rgmana");
+        redisUtil.set("Chloe", "Chloe1-Rgmana");
 
-        String Chloe = (String)redisUtil.get("Chloe");
+        String Chloe = (String) redisUtil.get("Chloe");
         log.info("Chloe:" + Chloe);
 
-        Map<String,String> testMap = new HashMap<>(1);
-        testMap.put("test1","1");
-        testMap.put("test2","2");
-        testMap.put("test3","3");
+        Map<String, String> testMap = new HashMap<>(1);
+        testMap.put("test1", "1");
+        testMap.put("test2", "2");
+        testMap.put("test3", "3");
 
         redisUtil.set("test", JsonUtil.toFastJsonByObject(testMap));
 
         String test = (String) redisUtil.get("test");
 
-        log.info("test:" + JsonUtil.getObjectByFactJson(test,Map.class));
+        log.info("test:" + JsonUtil.getObjectByFactJson(test, Map.class));
         return "Chloe hello";
     }
 
     @ResponseBody
     @RequestMapping("Chloe")
-    public String Chloe(){
+    public String Chloe() {
         QueryWrapper<Rgmana> queryWrapper = Wrappers.query();
 //        queryWrapper.lambda().eq(Rgmana::getT1,"1");
         List<Rgmana> rgmanas = rgmanaService.list(queryWrapper);
@@ -74,25 +71,25 @@ public class TestController {
     }
 
     @PostMapping("PostChloe")
-    public String PostChloe(@RequestBody Map<String,Object> data){
+    public String PostChloe(@RequestBody Map<String, Object> data) {
         log.info("PostChloe:" + data);
         String user = (String) data.get("user");
-        Map<String,Object> resultMap = new HashMap<>(1);
-        resultMap.put("user",user);
+        Map<String, Object> resultMap = new HashMap<>(1);
+        resultMap.put("user", user);
         return JsonUtil.toFastJsonByObject(resultMap);
+    }
+
+    @GetMapping("ScarletTest")
+    public String ScarletTest() {
+        return "Scarlet";
     }
 
 
     @GetMapping("AnnotationAopThread")
-    public String AnnotationAopThread(){
+    public String AnnotationAopThread() {
         log.info("Chloe1");
         chloeSrv.testChloe();
         log.info("Chloe2");
         return "Chloe!!!";
-    }
-
-    @GetMapping("ChloeTest")
-    public String ChloeTest(){
-        return testUtil.getPath();
     }
 }

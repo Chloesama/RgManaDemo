@@ -2,7 +2,9 @@ package rgmana;
 
 import org.junit.Test;
 
-import java.nio.charset.StandardCharsets;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 /**
  * @ClassName T1
@@ -20,8 +22,26 @@ public class T1 {
     }
 
     @Test
-    public void test01(){
-        String str = "83,99,97,114,108,101,116,33,33,33";
-        System.out.println(str.split(",").length);
+    public void test01() throws InstantiationException, IllegalAccessException, InvocationTargetException {
+        chloeTest("Chloe");
+    }
+
+    public static void chloeTest(String a, Object... params) throws InstantiationException, IllegalAccessException, InvocationTargetException {
+        Object[] o = params;
+
+        Class<ChloeTest> chloeTestClass = ChloeTest.class;
+
+        Constructor<?>[] constructors = chloeTestClass.getConstructors();
+
+        for (Constructor<?> constructor : constructors) {
+            System.out.println(constructor.getParameterCount() + "," + o.length);
+            if (constructor.getParameterCount() == o.length) {
+                ChloeTest chloeTest = (ChloeTest) constructor.newInstance(params);
+
+                System.out.println("Scarlet:" + chloeTest);
+            }
+        }
+
+        System.out.println(o.length);
     }
 }
