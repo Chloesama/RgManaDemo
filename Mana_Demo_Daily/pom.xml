@@ -16,5 +16,9 @@
             <groupId>org.example</groupId>
             <artifactId>Mana_Demo_Util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
     </dependencies>
 </project>

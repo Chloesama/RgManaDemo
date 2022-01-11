@@ -8,7 +8,9 @@ package rgmana;
  * @Version 1.0
  **/
 public class T2 {
-    static boolean test;
     public static void main(String[] args) {
+
+        System.out.println("Scarlet");
+
     }
 }
