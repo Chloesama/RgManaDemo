@@ -1,0 +1,49 @@
+server:
+  port: 8805
+logging:
+  config: classpath:spring-log4j2-pro.xml
+spring:
+  redis:
+    cluster:
+      nodes: 192.168.225.129:7001,192.168.225.129:7002,192.168.225.129:7003,192.168.225.129:7004,192.168.225.129:7005,192.168.225.129:7006
+    database: 0
+    password: 123456
+    jedis:
+      pool:
+        max-active: 300 #连接池最大连接数(使用负值表示没有限制)
+        max-wait: -1s #连接池最大阻塞等待时间(使用负值表示没有限制)
+        max-idle: 100 #连接池中的最大空闲连接
+        min-idle: 20 #连接池中的最小空闲连接
+    timeout: 60000 #连接超时时间(毫秒)
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.p6spy.engine.spy.P6SpyDriver
+    druid:
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+        merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+      url: jdbc:p6spy:mysql://192.168.225.129:3306/chloe?useUnicode=true&useSSL=true
+      username: root
+      password: 123456

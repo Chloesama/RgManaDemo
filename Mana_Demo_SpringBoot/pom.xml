@@ -13,6 +13,7 @@
         <module>SpringBootTestBase</module>
         <module>SpringBootChloeProject</module>
         <module>SpringBootThread</module>
+        <module>SpringBootTestBaseToCopy</module>
     </modules>
 
     <artifactId>Mana_Demo_SpringBoot</artifactId>

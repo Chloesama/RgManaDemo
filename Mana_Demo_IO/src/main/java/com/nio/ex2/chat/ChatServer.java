@@ -22,9 +22,13 @@ public class ChatServer {
     public ChatServer() {
         try {
             selector = Selector.open();
+
             ssChannel = ServerSocketChannel.open();
+
             ssChannel.bind(new InetSocketAddress(PORT));
             ssChannel.configureBlocking(false);
+
+
             ssChannel.register(selector, SelectionKey.OP_ACCEPT);
         } catch (Exception e) {
             e.printStackTrace();
